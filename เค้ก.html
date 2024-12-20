@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กล่องข้อความ</title>
+    <link rel="stylesheet" href="css/lol.css">
+    
+    
+</head>
+<body>
+    <div class="message-box">
+        <h2>Happy Birthday!</h2>
+        <button onclick="hideMessageBox()">กดตรงนี้สิ</button>
+    </div>
+    
+    <div id="HBD" class="poo">
+        <h1>สุขสันต์วันเกิดน้าา อายุ 16 ปีแล้วนะครับ</h1>
+        <p>ขอให้สุขภาพร่างกายแข็งแรงเน่อ ไม่ป่วยไม่เจ็บไม่ไข้นะครับ<br>
+           ขอให้มีความสุขมากๆนะครับ เรียนเก่งๆด้วยย กินเยอะๆด้วยน่าา<br>
+           หวังอะไรขอให้ได้แบบนั้นนะครับ ยิ้มเยอะๆนะ<br>
+           <span class="small-text">(เราอวยพรไม่เป็นอ่า ครั้งแรกเลยที่เขียนอวยพรวันเกิด)</span>
+           <h6>(เราไม่รู้จะให้อะไรเป็นของขวัญคุณเลย เราเลยตั้งใจเขียนเว็บนี้ให้คุณ<br>
+           อาจจาเป็นของขวัญเล็กๆน้อย แต่เราตั้งใจทำให้คุณเลยนะ<br>
+           ปล. เราอาจจะตกแต่งเว็บไม่สวยหน่อยนะ เพราะเราไม่ถนัดเรื่องแบบนี้เท่าไหร่น่ะ)<br></h6>
+        </p>
+    </div>
+    <div class="a1" id="a2">
+        <img src="1234 (เว็บไซต์).jpg" alt="" width="100%" height="100%" class="b2" > 
+        <button onclick="goToNextPage()">ดูรูปขอคุณออม</button>
+        
+
+
+    </div>
+
+    <script>
+        function hideMessageBox() {
+            document.querySelector('.message-box').style.display = 'none';
+            document.getElementById('HBD').classList.remove('poo');
+            document.getElementById('HBD').style.display = 'block';
+            document.getElementById('a2').classList.remove('a1');
+            
+            setTimeout(() => {
+                const balloons = document.querySelectorAll('.balloon');
+                balloons.forEach(balloon => {
+                    balloon.style.display = 'none'; // ซ่อนลูกโป่ง
+                });
+            }, 2000);
+        }
+
+        for (let i = 0; i < 40; i++) {
+            let balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            // Randomize balloon color
+            const colors = ['#ff6347', '#ffcc33', '#6bffb3', '#9d84f7', '#ff9a9e'];
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random horizontal positions
+            balloon.style.left = Math.random() * 100 + 'vw'; 
+            balloon.style.bottom = '-50px'; // เริ่มจากล่างจอ
+            balloon.style.bottom = Math.random() * 70 + 'vh'; 
+            balloon.style.width = Math.random() * 20 + 30 + 'px';
+            balloon.style.height = balloon.style.width;
+
+            document.body.appendChild(balloon);
+
+            function goToNextPage() {
+            window.location.href = "กล่อง.html"; // เปลี่ยน "nextpage.html" เป็นลิงก์ที่ต้องการ
+        }
+        
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภาพซ้อนแบบปัด</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <video class="video-background" autoplay loop muted>
+        <source src="1219 (2)(1).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="carousel-container">
+        <div class="carousel" id="carousel">
+            <img src="ase/aomm/1721907448865.jpg" alt="Image 1">
+            <img src="ase/aomm/1721536787478.jpg" alt="Image 2">
+            <img src="ase/aomm/1721907587470.jpg" alt="Image 3">
+            <img src="ase/aomm/1721371075377.jpg" alt="Image 4">
+            <img src="ase/aomm/IMG20240810125945.jpg" alt="Image 5">
+            
+        </div>
+    </div>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+let isDragging = false;
+let startX = 0;
+let currentTranslate = 0;
+let previousTranslate = 0;
+let animationID;
+let currentIndex = 0;
+
+const images = document.querySelectorAll('.carousel img');
+
+// Set position based on index
+const setPositionByIndex = () => {
+    currentTranslate = currentIndex * -300; // 300px = ความกว้างของ container
+    previousTranslate = currentTranslate;
+    carousel.style.transform = `translateX(${currentTranslate}px)`;
+};
+
+// Drag and drop logic
+const startDrag = (e) => {
+    isDragging = true;
+    startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    animationID = requestAnimationFrame(animation);
+    carousel.style.transition = 'none';
+};
+
+const drag = (e) => {
+    if (!isDragging) return;
+    const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+    currentTranslate = previousTranslate + currentX - startX;
+};
+
+const endDrag = () => {
+    cancelAnimationFrame(animationID);
+    isDragging = false;
+
+    // Determine which slide to go to
+    const movedBy = currentTranslate - previousTranslate;
+
+    if (movedBy < -100 && currentIndex < images.length - 1) {
+        currentIndex++; // Move to next slide
+    } else if (movedBy > 100 && currentIndex > 0) {
+        currentIndex--; // Move to previous slide
+    }
+
+    setPositionByIndex();
+};
+
+const animation = () => {
+    carousel.style.transform = `translateX(${currentTranslate}px)`;
+    if (isDragging) requestAnimationFrame(animation);
+};
+
+// Add Event Listeners
+carousel.addEventListener('mousedown', startDrag);
+carousel.addEventListener('mousemove', drag);
+carousel.addEventListener('mouseup', endDrag);
+carousel.addEventListener('mouseleave', endDrag);
+
+carousel.addEventListener('touchstart', startDrag);
+carousel.addEventListener('touchmove', drag);
+carousel.addEventListener('touchend', endDrag);
+
+// Set initial position
+setPositionByIndex();
+
+    </script>
+</body>
+</html>
